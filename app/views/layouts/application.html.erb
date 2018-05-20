@@ -10,6 +10,8 @@
 
   <body>
     <% if user_signed_in? %>
+    <%= link_to "Courses", courses_path %>
+    <%= link_to "Lectures", lectures_path %>
     <%= link_to "Sign out", destroy_user_session_path, :method => :delete %>
     <% else %>
     <%= link_to "Sign In", new_user_session_path %>

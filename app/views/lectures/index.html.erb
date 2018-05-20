@@ -1,0 +1,38 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Lectures</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Content</th>
+      <th>File Attachment</th>
+      <th>Course</th>
+      <th>Created At</th>
+      <th colspan="3">Actions</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @lectures.each do |lecture| %>
+      <tr>
+        <td><%= raw lecture.content %></td>
+        <td><%=  link_to 'Download', lecture.attachement_url %></td>
+        <td><%= lecture.course.title %></td>
+        <td><%= time_ago_in_words(lecture.created_at) %></td>
+        <td><%= link_to 'Show', lecture %></td>
+        <% if can? :update, lecture %>
+          <td><%= link_to 'Edit', edit_lecture_path(lecture) %></td>
+        <% end %>
+        <% if can? :destroy, lecture %>
+          <td><%= link_to 'Destroy', lecture, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <% end %>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+<% if can? :create, @lectures %>
+  <%= link_to 'New Lecture', new_lecture_path %>
+<% end %>
